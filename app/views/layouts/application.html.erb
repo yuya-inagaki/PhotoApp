@@ -16,10 +16,10 @@
           Logged in as <strong><%= current_user.name %></strong>.
           <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
         </div>
-        <% if @current_user.image %>
-        <img src="<%= current_user.image %>" class="user-icon">
+        <% if current_user.image %>
+          <img src="<%= current_user.image %>" class="user-icon">
         <% else %>
-        <%= image_tag 'default.png', class: 'user-icon' %>
+          <%= image_tag 'default.png', class: 'user-icon' %>
         <% end %>
       <% else %>
         <div>
