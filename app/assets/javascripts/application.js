@@ -18,7 +18,8 @@
 //= require popper
 //= require bootstrap
 
-$(function(){
+//初回読み込み、リロード、ページ切り替えで動く。
+$(document).on('turbolinks:load', function() {
     $('.user-icon').click(function(){
         $('.user-menu').toggle();
     });
