@@ -17,9 +17,10 @@
 <% end %>
 
 <% @posts.each do |post| %>
-    <div style="border-bottom:1px solid gray; padding:10px;">
-        <p>タイトル：<%= post.title %></p>
-        <p>内容：<%= post.content %></p>
-        <p>投稿ユーザ：</p>
-    </div>
+    <%= link_to post_path(post) do %>
+        <div style="border-bottom:1px solid gray; padding:10px;">
+            <p>タイトル：<%= post.title %></p>
+            <p>内容：<%= post.content %></p>
+        </div>
+    <% end %>
 <% end %>
