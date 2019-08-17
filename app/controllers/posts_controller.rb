@@ -8,6 +8,22 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
   end
 
+  def new
+    @post = Post.new
+  end
+
+  def create
+    # render plain: params[:post].inspect
+    @post = Post.new(post_params)
+    @post.user_id = current_user.id
+    if @post.save
+      flash[:notice] = "記事を作成しました"
+      redirect_to posts_path
+    else
+      render 'new'
+    end
+  end
+
   def edit
     @post = Post.find(params[:id])
   end

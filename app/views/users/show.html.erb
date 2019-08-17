@@ -14,6 +14,7 @@
 
 <% if current_user.id == @user.id %>
 <%= link_to "編集", edit_user_registration_path %>
+<%= link_to "新規記事", new_post_path %>
 <% end %>
 
 <% @posts.each do |post| %>
