@@ -12,7 +12,15 @@
 
   <div class="field">
     <%= f.label :メールアドレス %><br />
+    <% 
+      if resource.email[-12, 12] == 'photoapp.com'
+      resource.email = ''
+    %>
+    <span class="error-msg">メールアドレスを登録してください</span>
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <% else %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <% end %>
   </div>
 
   <!--アカウント編集時にプロフィールを入力できるようにフォームを追加-->
@@ -26,24 +34,31 @@
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :パスワード %> <i>(変更の必要がない場合は空欄で問題ありません)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> 文字以上</em>
-    <% end %>
+  <% if resource.provider.blank? %> 
+  <span class="password-change-btn">パスワードを変更する</span>
+  <div class="password-change" style="display:none;">
+    <div class="field">
+      <%= f.label :パスワード %> <i>(変更の必要がない場合は空欄で問題ありません)</i><br />
+      <%= f.password_field :password, autocomplete: "new-password" %>
+      <% if @minimum_password_length %>
+        <br />
+        <em><%= @minimum_password_length %> 文字以上</em>
+      <% end %>
+    </div>
+
+    <div class="field">
+      <%= f.label :パスワード（確認） %><br />
+      <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    </div>
   </div>
 
   <div class="field">
-    <%= f.label :パスワード（確認） %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :現在のパスワード %> <i>(we need your current password to confirm your changes)</i><br />
+    <%= f.label :現在のパスワードを入力してください %><br />
     <%= f.password_field :current_password, autocomplete: "current-password" %>
   </div>
+  <% else %>
+     <p>SNSアカウントでログイン中</p>
+  <% end %>
 
   <div class="actions">
     <%= f.submit "変更" %>

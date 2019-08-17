@@ -17,12 +17,26 @@ class User < ApplicationRecord
         provider: auth.provider,
         email:    User.dummy_email(auth),
         name:  auth.info.name,
-        password: Devise.friendly_token[0, 20],
+        # password: Devise.friendly_token[0, 20],
         image:  auth.info.image
       )
     end
 
     user
+  end
+
+  # ログイン時、OmniAuthで認証したユーザーのパスワード入力免除するため、Deviseの実装をOverrideする。
+  def password_required?
+    super && provider.blank?  # provider属性に値があればパスワード入力免除
+  end
+
+  # Edit時、OmniAuthで認証したユーザーのパスワード入力免除するため、Deviseの実装をOverrideする。
+  def update_with_password(params, *options)
+    if encrypted_password.blank?            # encrypted_password属性が空の場合
+      update_attributes(params, *options)   # パスワード入力なしにデータ更新
+    else
+      super
+    end
   end
 
   private

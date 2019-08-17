@@ -7,10 +7,13 @@
     <%= f.label :メールアドレス %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>
+  
 
-  <div class="field">
+  <div id="input_password" class="field">
     <%= f.label :パスワード %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
+    <%= f.password_field :password, autocomplete: "current-password", 'v-model': "message"%>
+    <span class="error-msg" v-if="error.require">必須項目です</span>
+    <span class="error-msg" v-if="error.tooShort">パスワードが短すぎます</span>
   </div>
 
   <% if devise_mapping.rememberable? %>
