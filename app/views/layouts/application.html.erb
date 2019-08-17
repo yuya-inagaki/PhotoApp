@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Photoapp</title>
+    <title><%= full_title(yield(:title)) %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width">
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -12,14 +13,17 @@
   <body>
     <header>
       <% if user_signed_in? %>
-        <div>
-          Logged in as <strong><%= current_user.name %></strong>.
-          <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+        <div class="user-menu">
+          <p>Logged in as <strong><%= current_user.name %></strong>.</p>
+          <p><%= link_to "マイページ", user_path(current_user) %></p>
+          <p><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></p>
+          <p><%= link_to "新規投稿", new_post_path %></p>
+          <p><%= link_to "ユーザー情報編集", edit_user_registration_path %></p>
         </div>
-        <% if @current_user.image %>
-        <img src="<%= current_user.image %>" class="user-icon">
+        <% if current_user.image %>
+          <img src="<%= current_user.image %>" class="user-icon">
         <% else %>
-        <%= image_tag 'default.png', class: 'user-icon' %>
+          <%= image_tag 'default.png', class: 'user-icon' %>
         <% end %>
       <% else %>
         <div>
@@ -34,5 +38,7 @@
     <div class="container">
       <%= yield %>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
   </body>
 </html>

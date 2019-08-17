@@ -1,0 +1,18 @@
+<% provide(:title, "記事編集") %>
+<h1>記事の編集</h1>
+
+<%= form_with model:@post, local: true do |form| %>
+    <p>タイトル</p>
+    <% if @post.errors.messages[:title].any? %>
+        <span class="error-msg"><%= @post.errors.messages[:title][0] %></span>
+    <% end %>
+    <%= form.text_field :title, value: @post.title %>
+
+    <p>内容</p>
+    <% if @post.errors.messages[:content].any? %>
+        <span class="error-msg"><%= @post.errors.messages[:content][0] %></span>
+    <% end %>
+    <%= form.text_area :content, value: @post.content %>
+
+    <%= form.submit %>
+<% end %>

@@ -1,0 +1,21 @@
+<% provide(:title, "ユーザー一覧") %>
+<h1>ユーザー一覧</h1>
+
+<div class="row">
+    <% @users.each do |user| %>
+        <div class="col-md-6 text-center">
+            <%= link_to user_path(user) do %>
+                <div>
+                    <% if user.image %>
+                        <img src="<%= user.image %>" class="user-icon-show">
+                    <% else %>
+                        <%= image_tag 'default.png', class: 'user-icon-show' %>
+                    <% end %>
+                    <p><%= user.name %></p>
+                    <p><%= user.email %></p>
+                    <p><%= user.profile %></p>
+                </div>
+            <% end %>
+        </div>
+    <% end %>
+</div>

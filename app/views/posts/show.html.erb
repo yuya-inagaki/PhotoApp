@@ -1,0 +1,14 @@
+<% provide(:title, "#{@post.title}") %>
+
+<% user = @post.user %>
+
+<h1><%= @post.title %></h1>
+
+<p>投稿者：<%= link_to user.name, user_path(user) %></p>
+<p>投稿日：<%= @post.created_at %></p>
+<p>更新日：<%= @post.updated_at %></p>
+<p><%= @post.content %></p>
+
+<% if user.id == current_user.id %>
+<%= link_to "編集", edit_post_path(@post) %>
+<% end %>
