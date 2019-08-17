@@ -9,4 +9,6 @@
 <p>更新日：<%= @post.updated_at %></p>
 <p><%= @post.content %></p>
 
+<% if user.id == current_user.id %>
 <%= link_to "編集", edit_post_path(@post) %>
+<% end %>

@@ -12,16 +12,17 @@
   <body>
     <header>
       <% if user_signed_in? %>
-        <div>
-          Logged in as <strong><%= current_user.name %></strong>.
-          <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+        <div class="user-menu">
+          <p>Logged in as <strong><%= current_user.name %></strong>.</p>
+          <p><%= link_to "マイページ", user_path(current_user) %></p>
+          <p><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></p>
+          <p><%= link_to "新規投稿", new_post_path %></p>
+          <p><%= link_to "ユーザー情報編集", edit_user_registration_path %></p>
         </div>
-        <%= link_to user_path(current_user) do %>
-          <% if current_user.image %>
-            <img src="<%= current_user.image %>" class="user-icon">
-          <% else %>
-            <%= image_tag 'default.png', class: 'user-icon' %>
-          <% end %>
+        <% if current_user.image %>
+          <img src="<%= current_user.image %>" class="user-icon">
+        <% else %>
+          <%= image_tag 'default.png', class: 'user-icon' %>
         <% end %>
       <% else %>
         <div>

@@ -17,3 +17,9 @@
 //= require jquery3
 //= require popper
 //= require bootstrap
+
+$(function(){
+    $('.user-icon').click(function(){
+        $('.user-menu').toggle();
+    });
+});

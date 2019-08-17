@@ -22,6 +22,13 @@
         <div style="border-bottom:1px solid gray; padding:10px;">
             <p>タイトル：<%= post.title %></p>
             <p>内容：<%= post.content %></p>
+            <% if @user.id == current_user.id %>
+                <%= link_to "削除",
+                post_path(post),
+                method: :delete,
+                data:{ confirm: '本当に削除しても大丈夫ですか？' }
+                %>
+            <% end %>
         </div>
     <% end %>
 <% end %>
