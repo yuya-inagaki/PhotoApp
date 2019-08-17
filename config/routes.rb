@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   get '/', to: 'users#index'
 
   resources :users, only: [:index, :show]
-  resources :posts, only: [:index]
+  resources :posts, only: [:index, :show]
 
   
 
