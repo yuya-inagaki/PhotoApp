@@ -8,3 +8,5 @@
 <p>投稿日：<%= @post.created_at %></p>
 <p>更新日：<%= @post.updated_at %></p>
 <p><%= @post.content %></p>
+
+<%= link_to "編集", edit_post_path(@post) %>
