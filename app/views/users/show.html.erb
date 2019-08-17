@@ -16,12 +16,10 @@
 <%= link_to "編集", edit_user_registration_path %>
 <% end %>
 
-<% if @user.posts.any? %>
-<% @user.posts.each do |post| %>
+<% @posts.each do |post| %>
     <div style="border-bottom:1px solid gray; padding:10px;">
         <p>タイトル：<%= post.title %></p>
         <p>内容：<%= post.content %></p>
         <p>投稿ユーザ：</p>
     </div>
-<% end %>
 <% end %>
